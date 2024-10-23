@@ -17,6 +17,7 @@ return new class extends Migration
             
             $table->string('product_api_id')->comment('api column');
             $table->string('title');
+            $table->integer('stock_alert')->default(0);
             $table->text('description')->nullable();
             $table->text('description2')->nullable();
             $table->text('description3')->nullable();

@@ -12,6 +12,7 @@ class Product extends Model
 
     protected $fillable = [
         "product_api_id",
+        "stock_alert",
         "title",
         "description",
         "description2",

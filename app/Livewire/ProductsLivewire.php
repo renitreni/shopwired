@@ -11,6 +11,10 @@ class ProductsLivewire extends Component
 {
     public $products;
 
+    public $hiddenId;
+
+    public $productStock;
+
     public function mount(){
         $this->products = Product::all()->toArray();
     }
@@ -29,5 +33,27 @@ class ProductsLivewire extends Component
         app(ProductServices::class)->syncApiProducts($result);
 
         $this->products = Product::all()->toArray();
+    }
+
+    public function editStockLevel($id, $stockLevel)
+    {
+        $this->hiddenId = $id;
+        $this->productStock = $stockLevel;
+    }
+    
+    public function updateStockLevel()
+    {
+        Product::where('id', $this->hiddenId)->update(['stock_alert' => $this->productStock]);
+
+        $this->hiddenId = null;
+        $this->productStock = null;
+
+        $this->products = Product::all()->toArray();
+    }
+
+    public function cancelEdit()
+    {
+        $this->hiddenId = null;
+        $this->productStock = null;
     }
 }
