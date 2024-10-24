@@ -32,7 +32,7 @@ class ProductsLivewire extends Component
 
         app(ProductServices::class)->syncApiProducts($result);
 
-        $this->products = Product::all()->toArray();
+        $this->products = Product::query()->orderBy('id')->get()->toArray();
     }
 
     public function editStockLevel($id, $stockLevel)
@@ -48,7 +48,7 @@ class ProductsLivewire extends Component
         $this->hiddenId = null;
         $this->productStock = null;
 
-        $this->products = Product::all()->toArray();
+        $this->products = Product::query()->orderBy('id')->get()->toArray();
     }
 
     public function cancelEdit()

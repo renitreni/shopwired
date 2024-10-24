@@ -43,7 +43,7 @@
                                     Edit
                                 </a>
                             @else
-                                <input type="email" id="UserEmail" class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm mb-3" wire:model='productStock'/>
+                                <input type="number" id="UserEmail" class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm mb-3" wire:model='productStock'/>
                                 <a wire:click='updateStockLevel()'
                                     class="inline-block border border-green-600 bg-green-600 px-1 text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
                                     href="#">
