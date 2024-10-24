@@ -14,7 +14,11 @@ class ProductsLivewire extends Component
 
     public $hiddenId;
 
+    public $hiddenStockId;
+
     public $productStock;
+
+    public $stockLevel;
 
     public function mount(){
         $this->products = Product::all()->toArray();
@@ -35,24 +39,48 @@ class ProductsLivewire extends Component
 
         $this->products = Product::query()->orderBy('id')->get()->toArray();
     }
+    
+    public function editStock($id, $level)
+    {
+        $this->hiddenStockId = $id;
+        $this->stockLevel = $level;
+    }
+
+    public function updateStock()
+    {
+        Product::where('id', $this->hiddenStockId)->update(['stock' => $this->stockLevel]);
+        
+        $product = Product::find($this->hiddenStockId);
+
+        if($product->sku ?? null) {
+            app(StockEndpoint::class)->postStock([
+                'sku' => $product->sku,
+                'quantity' => $product->stock,
+            ]);
+        }
+
+        $this->hiddenStockId = null;
+        $this->stockLevel = null;
+
+        $this->products = Product::query()->orderBy('id')->get()->toArray();
+    }
+
+    public function cancelStockAlertEdit()
+    {
+        $this->hiddenStockId = null;
+        $this->stockLevel = null;
+    }
 
     public function editStockLevel($id, $stockLevel)
     {
         $this->hiddenId = $id;
         $this->productStock = $stockLevel;
     }
-    
+
     public function updateStockLevel()
     {
         Product::where('id', $this->hiddenId)->update(['stock_alert' => $this->productStock]);
         
-        $product = Product::find($this->hiddenId);
-        
-        app(StockEndpoint::class)->postStock([
-            'sku' => $product->sku,
-            'quantity' => $product->stock_alert,
-        ]);
-
         $this->hiddenId = null;
         $this->productStock = null;
 

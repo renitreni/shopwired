@@ -7,6 +7,6 @@ class ProductEndpoint
 
     public function getProducts()
     {
-        return $this->basicAuthGet('/products');
+        return $this->basicAuthGet('/products', ['embed' => 'variations']);
     }
 }

@@ -28,12 +28,36 @@
                     </div>
 
                     <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                        <dt class="font-medium text-gray-900">Stock</dt>
-                        <dd class="text-gray-700 sm:col-span-2">{{ $product['stock'] }}</dd>
+                        <dt class="font-medium text-gray-900">Stock Level</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                            @if ($product['id'] != $hiddenStockId)
+                                {{ $product['stock'] }}
+                                <a wire:click='editStock({{ $product['id'] }}, {{ $product['stock'] }})'
+                                    class="inline-block border border-indigo-600 bg-indigo-600 px-1 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                                    href="#">
+                                    Edit
+                                </a>
+                            @else
+                                <input type="number" id="UserEmail"
+                                    class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm mb-3"
+                                    wire:model='stockLevel' />
+
+                                <a wire:click='updateStock()'
+                                    class="inline-block border border-green-600 bg-green-600 px-1 text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
+                                    href="#">
+                                    Update
+                                </a>
+                                <a wire:click='cancelStockAlertEdit()'
+                                    class="inline-block border border-gray-600 bg-gray-600 px-1 text-white hover:bg-transparent hover:text-gray-600 focus:outline-none focus:ring active:text-gray-500"
+                                    href="#">
+                                    Cancel
+                                </a>
+                            @endif
+                        </dd>
                     </div>
 
                     <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                        <dt class="font-medium text-gray-900">Stock Level</dt>
+                        <dt class="font-medium text-gray-900">Stock Alert Level</dt>
                         <dd class="text-gray-700 sm:col-span-2">
                             @if ($product['id'] != $hiddenId)
                                 {{ $product['stock_alert'] }}
@@ -43,7 +67,10 @@
                                     Edit
                                 </a>
                             @else
-                                <input type="number" id="UserEmail" class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm mb-3" wire:model='productStock'/>
+                                <input type="number" id="UserEmail"
+                                    class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm mb-3"
+                                    wire:model='productStock' />
+                                    
                                 <a wire:click='updateStockLevel()'
                                     class="inline-block border border-green-600 bg-green-600 px-1 text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
                                     href="#">
