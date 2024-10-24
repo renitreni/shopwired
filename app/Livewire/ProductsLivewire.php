@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Product;
 use App\Services\ProductServices;
 use App\ShopwiredAPI\ProductEndpoint;
+use App\ShopwiredAPI\StockEndpoint;
 use Livewire\Component;
 
 class ProductsLivewire extends Component
@@ -44,6 +45,13 @@ class ProductsLivewire extends Component
     public function updateStockLevel()
     {
         Product::where('id', $this->hiddenId)->update(['stock_alert' => $this->productStock]);
+        
+        $product = Product::find($this->hiddenId);
+        
+        app(StockEndpoint::class)->postStock([
+            'sku' => $product->sku,
+            'quantity' => $product->stock_alert,
+        ]);
 
         $this->hiddenId = null;
         $this->productStock = null;

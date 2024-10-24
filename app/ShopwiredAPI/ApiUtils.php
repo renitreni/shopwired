@@ -15,4 +15,14 @@ trait ApiUtils
             'verify' => false,
         ])->get(env('CLIENT_LINK') . $link);
     }
+
+    public function basicAuthPost($link, $params)
+    {
+        return Http::withBasicAuth(
+            username: env('CLIENT_ID'),
+            password: env('CLIENT_SECRET')
+        )->withOptions([
+            'verify' => false,
+        ])->post(env('CLIENT_LINK') . $link, $params);
+    }
 }
