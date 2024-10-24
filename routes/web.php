@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', ProductsLivewire::class)->name('home');
 Route::get('/logs', LogsLivewire::class)->name('logs');
 
-Route::get('/verify-shopwire-webhook', function(Request $request){
+Route::post('/verify-shopwire-webhook', function(Request $request){
     $webhook = new WebHook();
     $webhook->result = json_encode($request->input());
     $webhook->save();
