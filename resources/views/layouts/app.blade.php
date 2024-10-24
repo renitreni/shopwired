@@ -31,7 +31,10 @@
                 <nav aria-label="Global" class="hidden md:block">
                     <ul class="flex items-center gap-6 text-sm">
                         <li>
-                            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Products </a>
+                            <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ route('home') }}"> Products </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-500 transition hover:text-gray-500/75" href="{{ route('logs') }}"> Logs </a>
                         </li>
                     </ul>
                 </nav>

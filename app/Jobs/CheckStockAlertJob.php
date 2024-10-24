@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\StockAlertEmail;
+use App\Models\Audit;
 use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
@@ -29,5 +30,11 @@ class CheckStockAlertJob implements ShouldQueue
         $product = Product::query()->where('stock', '<=', 'stock_level')->get()->toArray();
 
         Mail::to(env('APP_EMAIL'))->send(new StockAlertEmail($product));
+
+        Audit::create([
+            'message' => 'StockAlertEmail result: ' . json_encode($product),
+            'source' => 'CheckStockAlertJob',
+            'method' => 'handle',
+        ]);
     }
 }
