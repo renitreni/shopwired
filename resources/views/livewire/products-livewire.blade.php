@@ -1,22 +1,41 @@
-<div>
-    <!-- Base -->
+<div class="relative">
+    <livewire:components.webhook-livewire-component></livewire:components.webhook-livewire-component>
+    <div class="flex gap-2">
 
-    <a class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring" href="#"
-        wire:click='syncProducts' wire:loading.class="hidden">
-        <span class="absolute inset-0 border border-indigo-600 group-active:border-indigo-500"></span>
-        <span
-            class="block border border-indigo-600 bg-indigo-600 px-12 py-3 transition-transform active:border-indigo-500 active:bg-indigo-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
-            Download Products
-        </span>
-    </a>
-    <a class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring" href="#"
-        wire:loading wire:target='syncProducts'>
-        <span class="absolute inset-0 border border-orange-600"></span>
-        <span
-            class="block border border-orange-600 bg-orange-600 px-12 py-3 transition-transform active:border-orange-500 active:bg-orange-500">
-            Syncing API...
-        </span>
-    </a>
+        <a class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring" href="#"
+            wire:click='syncProducts' wire:loading.class="hidden">
+            <span class="absolute inset-0 border border-indigo-600 group-active:border-indigo-500"></span>
+            <span
+                class="block border border-indigo-600 bg-indigo-600 px-12 py-3 transition-transform active:border-indigo-500 active:bg-indigo-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+                Download Products
+            </span>
+        </a>
+        <a class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring" href="#"
+            wire:loading wire:target='syncProducts'>
+            <span class="absolute inset-0 border border-orange-600"></span>
+            <span
+                class="block border border-orange-600 bg-orange-600 px-12 py-3 transition-transform active:border-orange-500 active:bg-orange-500">
+                Syncing API...
+            </span>
+        </a>
+
+        <a class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
+            href="#" wire:click='openWebHooks' wire:loading.class="hidden">
+            <span class="absolute inset-0 border border-green-600 group-active:border-green-500"></span>
+            <span
+                class="block border border-green-600 bg-green-600 px-12 py-3 transition-transform active:border-green-500 active:bg-green-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+                Webhook List
+            </span>
+        </a>
+        <a class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
+            href="#" wire:loading wire:target='openWebHooks'>
+            <span class="absolute inset-0 border border-orange-600"></span>
+            <span
+                class="block border border-orange-600 bg-orange-600 px-12 py-3 transition-transform active:border-orange-500 active:bg-orange-500">
+                Fetching API...
+            </span>
+        </a>
+    </div>
 
     <div class="grid grid-cols-4 gap-4 mt-3">
         @foreach ($products as $product)
@@ -70,7 +89,7 @@
                                 <input type="number" id="UserEmail"
                                     class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm mb-3"
                                     wire:model='productStock' />
-                                    
+
                                 <a wire:click='updateStockLevel()'
                                     class="inline-block border border-green-600 bg-green-600 px-1 text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
                                     href="#">

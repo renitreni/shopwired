@@ -16,7 +16,7 @@ trait ApiUtils
         ])->get(env('CLIENT_LINK') . $link, $query);
     }
 
-    public function basicAuthPost($link, $params)
+    public function basicAuthPost($link, $params = [])
     {
         return Http::withBasicAuth(
             username: env('CLIENT_ID'),

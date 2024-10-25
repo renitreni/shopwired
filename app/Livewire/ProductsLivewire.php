@@ -92,4 +92,9 @@ class ProductsLivewire extends Component
         $this->hiddenId = null;
         $this->productStock = null;
     }
+
+    public function openWebHooks()
+    {
+        $this->dispatch('get-web-hooks');
+    }
 }
