@@ -17,5 +17,5 @@ Route::post('/verify-shopwire-webhook', function(Request $request){
 });
 
 Route::get('/dispatch', function(Request $request){
-    CheckStockAlertJob::dispatch();
+    \App\Jobs\CheckStockAlertJob::dispatch();
 });

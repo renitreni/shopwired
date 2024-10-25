@@ -27,9 +27,8 @@ class CheckStockAlertJob implements ShouldQueue
     public function handle(): void
     {
         // stock alert level is at or above the current stock level
-        $product = Product::query()->where('stock', '<=', 'stock_level')->get()->toArray();
-
-        Mail::to(env('APP_EMAIL'))->send(new StockAlertEmail($product));
+        $product = \App\Models\Product::query()->whereColumn('stock', '<=', 'stock_alert')->get()->toArray();
+        \Illuminate\Support\Facades\Mail::to(env('APP_EMAIL'))->send(new \App\Mail\StockAlertEmail($product));
 
         Audit::create([
             'message' => 'StockAlertEmail result: ' . json_encode($product),
